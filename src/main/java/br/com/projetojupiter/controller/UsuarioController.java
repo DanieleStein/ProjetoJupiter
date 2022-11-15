@@ -1,7 +1,12 @@
 package br.com.projetojupiter.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import br.com.projetojupiter.model.UsuarioLogin;
+import br.com.projetojupiter.request.EmailUsuarioRequest;
+import br.com.projetojupiter.response.MensagemResponse;
+import br.com.projetojupiter.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +27,35 @@ import br.com.projetojupiter.repository.UsuarioRepository;
 public class UsuarioController {
 	
 	@Autowired
+	private UsuarioService usuarioService;
+
+	@Autowired
 	private UsuarioRepository repository;
+
+	@PostMapping("/login")
+	public ResponseEntity<UsuarioLogin> authentication(@RequestBody Optional<UsuarioLogin> user) {
+		return usuarioService.logar(user)
+				.map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+	}
+
+	@PostMapping("/register")
+	public ResponseEntity<Usuario> register(@RequestBody Usuario usuario){
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(usuarioService.cadastrarUsuario(usuario));
+	}
+
+	@GetMapping("/ativo")
+	public ResponseEntity<MensagemResponse> ativo(@RequestBody EmailUsuarioRequest usuario){
+		String email = usuario.getEmail();
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(usuarioService.ehUsuarioAtivo(email));
+	}
+
+
+
+
+
 	
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getAll() {
@@ -40,4 +73,7 @@ public class UsuarioController {
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(repository.save(usuario));
 	}
+
+
+
 }

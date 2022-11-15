@@ -1,7 +1,7 @@
 package br.com.projetojupiter.controller;
 
-
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.projetojupiter.model.Criador;
+import br.com.projetojupiter.model.CriadorLogin;
 import br.com.projetojupiter.repository.CriadorRepository;
+import br.com.projetojupiter.service.CriadorService;
 
 @RestController
 @RequestMapping("/criador")
@@ -23,7 +25,25 @@ import br.com.projetojupiter.repository.CriadorRepository;
 public class CriadorController {
 	
 	@Autowired
+	private CriadorService criadorService;
+	
+	@Autowired
 	private CriadorRepository repository;
+	
+	@PostMapping("/login")
+	public ResponseEntity<CriadorLogin> authentication(@RequestBody Optional<CriadorLogin> criad) {
+		return criadorService.logarCriador(criad)
+				.map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+	}
+	
+	@PostMapping("/register")
+	public ResponseEntity<Criador> register(@RequestBody Criador criador) {
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(criadorService.cadastrarCriador(criador));
+	}
+	
+	
 	
 	@GetMapping
 	public ResponseEntity<List<Criador>> getAll() {
