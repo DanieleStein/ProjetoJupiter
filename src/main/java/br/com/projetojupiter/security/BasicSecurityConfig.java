@@ -66,6 +66,9 @@ public class BasicSecurityConfig {
             "/usuario/register",
             "/curso",
             "/conteudos",
+            "/cartao",
+            "/pedido",
+            "/usuario",
             "/criador/login",
             "/criador/register"
     };
