@@ -51,11 +51,11 @@
         </dependency>
 
         <!-- Lombok -->
-        <dependency>
+        <!-- <dependency>
       		<groupId>org.projectlombok</groupId>
       		<artifactId>lombok</artifactId>
       		<optional>true</optional>
-    	</dependency>
+    	</dependency>-->
 
 		<!-- Dependencia Security -->
 		<dependency>
@@ -72,12 +72,12 @@
 	</dependencies>
 
 	<build>
-<!--		<plugins>
-			&lt;!&ndash;<plugin>
+		<plugins>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>&ndash;&gt;
-		</plugins>-->
+			</plugin>
+		</plugins>
 	</build>
 
 </project>

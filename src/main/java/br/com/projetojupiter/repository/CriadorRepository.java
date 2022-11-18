@@ -1,6 +1,5 @@
 package br.com.projetojupiter.repository;
 
-
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;

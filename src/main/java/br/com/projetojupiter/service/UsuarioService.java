@@ -1,6 +1,8 @@
 package br.com.projetojupiter.service;
 
 
+import br.com.projetojupiter.email.EmailMensagens;
+import br.com.projetojupiter.email.SendEmailService;
 import br.com.projetojupiter.model.Pedido;
 import br.com.projetojupiter.model.Usuario;
 import br.com.projetojupiter.model.UsuarioLogin;
@@ -26,11 +28,15 @@ public class UsuarioService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+    
+    @Autowired
+    private SendEmailService sendEmailService;
 
     public Usuario cadastrarUsuario(Usuario usuario) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String senhaEncoder = encoder.encode(usuario.getSenha());
         usuario.setSenha(senhaEncoder);
+        this.sendEmailService.enviar(usuario.getEmail(), EmailMensagens.createTitle(usuario), EmailMensagens.mensagemToNewUsuario(usuario));
         return usuarioRepository.save(usuario);
     }
 
