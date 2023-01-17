@@ -35,7 +35,7 @@ class Usuario {
     var cpf: String = ""
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    lateinit var dataNascimento: Date
+    var dataNascimento: Date = Date()
 
     @OneToMany(mappedBy = "usuario", cascade = [CascadeType.ALL])
     @JsonIgnoreProperties("usuario")
