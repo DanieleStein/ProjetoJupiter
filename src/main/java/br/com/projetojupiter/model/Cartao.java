@@ -1,7 +1,7 @@
 package br.com.projetojupiter.model;
 
 import java.util.Date;
-
+import br.com.projetojupiter.model.Usuario;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

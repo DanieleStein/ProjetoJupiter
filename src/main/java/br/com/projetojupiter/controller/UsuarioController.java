@@ -3,6 +3,7 @@ package br.com.projetojupiter.controller;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.projetojupiter.model.Usuario;
 import br.com.projetojupiter.model.UsuarioLogin;
 import br.com.projetojupiter.request.EmailUsuarioRequest;
 import br.com.projetojupiter.response.MensagemResponse;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.projetojupiter.model.Usuario;
 import br.com.projetojupiter.repository.UsuarioRepository;
 
 @RestController
