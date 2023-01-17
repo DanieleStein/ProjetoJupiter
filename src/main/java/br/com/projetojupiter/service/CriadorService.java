@@ -4,12 +4,12 @@ import java.nio.charset.Charset;
 import java.util.Optional;
 
 import br.com.projetojupiter.model.Criador;
+import br.com.projetojupiter.model.CriadorLogin;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.projetojupiter.model.CriadorLogin;
 import br.com.projetojupiter.repository.CriadorRepository;
 
 @Service
