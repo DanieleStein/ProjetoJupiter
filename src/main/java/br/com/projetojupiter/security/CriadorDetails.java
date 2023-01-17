@@ -2,10 +2,9 @@ package br.com.projetojupiter.security;
 
 import java.util.Collection;
 
+import br.com.projetojupiter.model.Criador;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import br.com.projetojupiter.model.Criador;
 
 public class CriadorDetails implements UserDetails {
 	
