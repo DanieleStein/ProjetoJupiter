@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 class EmailMensagens {
 
     fun createTitle(usuario: Usuario): String {
-        return usuario.nome + ", seu cadastro foi realizado com sucesso!"
+        return usuario.nome + " seu cadastro foi realizado com sucesso!"
     }
 
     fun mensagemToNewUsuario(usuario: Usuario): String {
