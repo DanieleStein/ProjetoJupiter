@@ -1,6 +1,5 @@
 package br.com.projetojupiter.service;
 
-
 import br.com.projetojupiter.email.EmailMensagens;
 import br.com.projetojupiter.email.SendEmailService;
 import br.com.projetojupiter.model.Pedido;
@@ -32,11 +31,14 @@ public class UsuarioService {
     @Autowired
     private SendEmailService sendEmailService; //Injetada a classe que tem o metodo de envio de email
 
+    @Autowired
+    private EmailMensagens emailMensagens;
+
     public Usuario cadastrarUsuario(Usuario usuario) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String senhaEncoder = encoder.encode(usuario.getSenha());
         usuario.setSenha(senhaEncoder);
-        this.sendEmailService.enviar(usuario.getEmail(), EmailMensagens.createTitle(usuario), EmailMensagens.mensagemToNewUsuario(usuario));
+        this.sendEmailService.enviar(usuario.getEmail(), emailMensagens.createTitle(usuario), emailMensagens.mensagemToNewUsuario(usuario));
         return usuarioRepository.save(usuario);
     }
 
