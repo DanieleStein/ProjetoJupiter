@@ -15,34 +15,27 @@ import java.util.*
 @RestController
 @RequestMapping("/usuario")
 @CrossOrigin(origins = ["*"], allowedHeaders = ["*"])
-class UsuarioController {
-
-    @Autowired
-    var usuarioService: UsuarioService? = null
+class UsuarioController(
+    private var usuarioService: UsuarioService
+) {
 
     @Autowired
     var repository: UsuarioRepository? = null
 
     @PostMapping("/login")
-    fun authentication(@RequestBody user: Optional<UsuarioLogin>): ResponseEntity<UsuarioLogin> {
-        return usuarioService!!.logar(user)
-            .map { resp: UsuarioLogin ->
-                ResponseEntity.ok(
-                    resp
-                )
-            }
-            .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build())
+    fun authentication(@RequestBody user: UsuarioLogin): ResponseEntity<UsuarioLogin?> {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body( usuarioService.logar(user) )
     }
 
     @PostMapping("/register")
     fun register(@RequestBody usuario: Usuario?): ResponseEntity<Usuario>? {
         return ResponseEntity.status(HttpStatus.CREATED)
-            .body(usuarioService!!.cadastrarUsuario(usuario))
+            .body(usuario?.let { usuarioService!!.cadastrarUsuario(it) })
     }
 
     @GetMapping("/ativo")
     fun ativo(@RequestBody usuario: EmailUsuarioRequest): ResponseEntity<MensagemResponse>? {
-        val email = usuario.getEmail()
+        val email = usuario.email
         return ResponseEntity.status(HttpStatus.OK)
             .body(usuarioService!!.ehUsuarioAtivo(email))
     }
