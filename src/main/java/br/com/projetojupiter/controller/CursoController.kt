@@ -11,19 +11,16 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/curso")
 @CrossOrigin(origins = ["*"], allowedHeaders = ["*"])
-class CursoController {
+class CursoController(
+    var cursoService: CursoService,
+    var repository: CursoRepository
+) {
 
-    @Autowired
-    var cursoService: CursoService? = null
-
-
-    @Autowired
-    var repository: CursoRepository? = null
 
 
     @GetMapping
     fun getAll(): ResponseEntity<MutableList<Curso>> {
-        return ResponseEntity.ok(cursoService!!.all)
+        return ResponseEntity.ok(cursoService.getAll())
     }
 
 

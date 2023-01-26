@@ -8,3 +8,4 @@ import org.springframework.stereotype.Repository
 interface ConteudoRepository : JpaRepository<Conteudo, Long> {
     fun findAllByTituloContainingIgnoreCase(titulo: String): MutableList<Conteudo>
 }
+
